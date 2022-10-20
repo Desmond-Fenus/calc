@@ -24,10 +24,10 @@ body {
     font-size: 50px;
     text-align: end;
 }
-.calculator__buttons {
+/* .calculator__buttons {
     
 
-}
+} */
 
 .row {
     display: flex;
