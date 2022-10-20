@@ -16,10 +16,13 @@ body {
 .calculator__output {
     border: 1px solid #000;
     margin-bottom: 45px;
+    padding-right: 5px;
     height: 60px;
     border-radius: 3px;
     background-color: white;
     box-shadow: -6px 10px 13px 0px rgba(34, 60, 80, 0.59) inset;
+    font-size: 50px;
+    text-align: end;
 }
 .calculator__buttons {
     
@@ -44,6 +47,14 @@ body {
     border: 0 solid #000;
     border-radius: 3px;
     box-shadow: 4px 4px 10px -4px rgba(0, 1, 2, 0.9);
+}
+
+.but-style:hover {
+    background: rgba(0, 0, 0, 0.526);
+}
+
+.but-style:disabled{
+    background-color: rgba(49, 48, 48, 0.981);
 }
 
 
