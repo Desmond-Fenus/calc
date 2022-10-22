@@ -1,13 +1,32 @@
 "use strict";
 
+let events = {
+    num: document.querySelectorAll('button[num]'),
+    oper: document.querySelectorAll('button[oper]'),
+    out: document.querySelector('div[class="calculator__output"]')
+}
+
 class Calculator {
 
-    firstNumber = 0;
-    secondNumber;
-    operation;
+    firstNumber = "0";
+    secondNumber = "";
+    operation = "";
+    maxDur = 10;
 
-    addToBuffer() {
+    inputNumber(value) {
+        if (this.operation) {
+            if (value === "." && this.secondNumber.includes(".")) return;
+            if (this.secondNumber.replace(".", "").length > this.maxDur) return;
+            this.firstNumber = this.firstNumber + value;
+        }
+        if (value === "." && this.firstNumber.includes(".")) return;
+        if (this.firstNumber.replace(".", "").length > this.maxDur) return;
+        this.firstNumber = this.firstNumber + value;
 
+    }
+
+    addOperation(value) {
+        this.operation = value;
     }
 
     result() {
@@ -16,11 +35,21 @@ class Calculator {
 
 }
 
-let numbers = document.querySelectorAll('button[num]')
-let operations = document.querySelectorAll('button[oper]')
+let calc = new Calculator();
 
-numbers.forEach((num) => {
-    num.addEventListener("click", () => {
-        console.log(num.getAttribute("num"))
+events.num
+    .forEach((num) => {
+        num.addEventListener("click", (event) => {
+            calc.inputNumber(event.target.getAttribute("num"))
+            console.log(calc.firstNumber)
+            events.out.innerHTML = +calc.firstNumber;
+        })
     })
-})
+
+events.oper
+    .forEach((oper) => {
+        oper.addEventListener("click", (event) => {
+            calc.addOperation(event.target.getAttribute("oper"))
+            console.log(calc.operation)
+        })
+    })
