@@ -52,6 +52,7 @@ class Calculator {
                 this.resultStory.push(+(this.firstNumber) / +(this.secondNumber));
                 break;
         }
+        console.log(this.resultStory)
 
         this.firstNumber = this.resultStory.slice(-1).toString()
         this.secondNumber = "";
