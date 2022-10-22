@@ -1,9 +1,13 @@
 "use strict";
 
+let fields = {
+    out: document.querySelector('div[class="calculator__output"]'),
+    buttons: document.querySelector('div[class="calculator__buttons"]')
+}
+
 let events = {
     num: document.querySelectorAll('button[num]'),
     oper: document.querySelectorAll('button[oper]'),
-    out: document.querySelector('div[class="calculator__output"]'),
     res: document.querySelector('button[result]'),
 }
 
@@ -16,20 +20,21 @@ class Calculator {
     resultStory = [];
 
     inputNumber(value) {
+        if (this.secondNumber.replace(".", "").length >= this.maxDur && this.firstNumber.replace(".", "").length >= this.maxDur) return;
         if (this.operation) {
             if (value === "." && this.secondNumber.includes(".")) return;
-            if (this.secondNumber.replace(".", "").length >= this.maxDur) return;
             this.secondNumber = this.secondNumber + value;
             return
         }
+        if (this.resultStory.length != 0) return
         if (value === "." && this.firstNumber.includes(".")) return;
-        if (this.firstNumber.replace(".", "").length >= this.maxDur) return;
         this.firstNumber = this.firstNumber + value;
 
     }
 
     addOperation(value) {
         this.operation = value;
+        console.log(this.operation)
     }
 
     result() {
@@ -47,6 +52,17 @@ class Calculator {
                 this.resultStory.push(+(this.firstNumber) / +(this.secondNumber));
                 break;
         }
+
+        this.firstNumber = this.resultStory.slice(-1).toString()
+        this.secondNumber = "";
+        this.operation = "";
+
+        console.log(this.firstNumber)
+
+    }
+
+    render(outputfield) {
+        this.secondNumber ? outputfield.innerHTML = this.secondNumber : outputfield.innerHTML = this.firstNumber
     }
 
 }
@@ -71,5 +87,10 @@ events.oper
 events.res
     .addEventListener("click", () => {
         calc.result();
-        console.log(calc.resultStory)
     })
+
+fields.buttons
+    .addEventListener('click', () => {
+        calc.render(fields.out)
+    })
+
