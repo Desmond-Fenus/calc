@@ -20,13 +20,14 @@ class Calculator {
     resultStory = [];
 
     inputNumber(value) {
-        if (this.secondNumber.replace(".", "").length >= this.maxDur && this.firstNumber.replace(".", "").length >= this.maxDur) return;
         if (this.operation) {
+            if (this.secondNumber.replace(".", "").length >= this.maxDur) return;
             if (value === "." && this.secondNumber.includes(".")) return;
             this.secondNumber = this.secondNumber + value;
             return
         }
         if (this.resultStory.length != 0) return
+        if (this.firstNumber.replace(".", "").length >= this.maxDur) return;
         if (value === "." && this.firstNumber.includes(".")) return;
         this.firstNumber = this.firstNumber + value;
 

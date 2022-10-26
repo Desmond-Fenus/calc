@@ -3,15 +3,20 @@ body {
     padding-left: 20px;
 }
 
+.main {
+    display: flex;
+}
+
 .calculator {
     padding: 40px 15px 30px 15px;
     display: flex;
     flex-direction: column;
     width: 300px;
-    height: 400px;
+   /*  height: 430px; */
     border-radius: 10px;
     background-color: rgb(35, 90, 124);
     box-shadow: 33px 34px 8px -11px rgba(34, 60, 80, 0.76);
+    margin-right: 40px;
 }
 .calculator__output {
     border: 1px solid #000;
@@ -23,6 +28,7 @@ body {
     box-shadow: -6px 10px 13px 0px rgba(34, 60, 80, 0.59) inset;
     font-size: 47px;
     text-align: end;
+    overflow: hidden;
 }
 /* .calculator__buttons {
     
@@ -57,4 +63,26 @@ body {
     background-color: rgba(49, 48, 48, 0.981);
 }
 
+
+.result-field {
+    border: 1px solid #000;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.result-field__row {
+    height: 30px;
+    border: 1px solid #000;
+    font-size: 25px;
+    text-align: end;
+}
+
+.result-field__row:nth-child(odd) {
+    background-color: rgba(152, 168, 7, 0.525);
+}
+
+.result-field__row:nth-child(even) {
+    background-color: rgba(140, 149, 57, 0.525);
+}
 
