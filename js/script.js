@@ -2,7 +2,9 @@
 
 let fields = {
     out: document.querySelector('div[class="calculator__output"]'),
-    buttons: document.querySelector('div[class="calculator__buttons"]')
+    buttons: document.querySelector('div[class="calculator__buttons"]'),
+    resultStoryBlock: document.querySelector('div[class="result-field"]'),
+    resultValue: document.querySelectorAll('div[class="result-field__row"]'),
 }
 
 let events = {
@@ -12,9 +14,10 @@ let events = {
     reset: document.querySelector('button[reset]'),
 }
 
-let createElemStory = function () {
-
-}
+/*      let div = document.createElement('div');
+        div.className = "result-field__row";
+        div.innerHTML = this.resultStory.slice(-1).toString();
+        fields.resultStoryBlock.appendChild(div); */
 
 class Calculator {
 
@@ -42,7 +45,6 @@ class Calculator {
 
     addOperation(value) {
         this.operation = value;
-        console.log(this.operation)
     }
 
     result() {
@@ -60,15 +62,23 @@ class Calculator {
                 this.resultStory.push(+(this.firstNumber) / +(this.secondNumber));
                 break;
             case "sqrt":
-                this.resultStory.push(Math.sqrt(this.firstNumber));
+                this.resultStory.push(Math.sqrt(this.secondNumber));
                 break;
         }
 
-        this.firstNumber = this.resultStory.slice(-1).toString()
+        console.log(this.resultStory)
+
+        if (!this.secondNumber) return;
+        this.loop = true;
+        this.firstNumber = this.resultStory.slice(-1).toString() || "0";
         this.secondNumber = "";
         this.operation = "";
-        this.loop = true;
 
+
+        let div = document.createElement('div');
+        div.className = "result-field__row";
+        div.innerHTML = this.resultStory.slice(-1).toString();
+        fields.resultStoryBlock.appendChild(div);
 
 
     }
@@ -78,12 +88,17 @@ class Calculator {
     }
 
     reset() {
+        this.resultStory = [];
         this.firstNumber = "0";
         this.secondNumber = "";
         this.operation = "";
         this.maxDur = 10;
         this.loop = false;
     }
+
+    /* addStory(blockForStory) {
+        
+    } */
 
 }
 
