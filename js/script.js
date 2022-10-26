@@ -12,14 +12,19 @@ let events = {
     reset: document.querySelector('button[reset]'),
 }
 
+let createElemStory = function () {
+
+}
+
 class Calculator {
 
-    firstNumber = "";
+    firstNumber = "0";
     secondNumber = "";
     operation = "";
     maxDur = 10;
     resultStory = [];
     loop = false;
+    memory = "";
 
     inputNumber(value) {
         if (this.operation) {
@@ -31,7 +36,7 @@ class Calculator {
         if (this.loop) return
         if (this.firstNumber.replace(".", "").length >= this.maxDur) return;
         if (value === "." && this.firstNumber.includes(".")) return;
-        this.firstNumber = this.firstNumber + value;
+        this.firstNumber = this.firstNumber.replace("0", "") + value;
 
     }
 
@@ -64,6 +69,8 @@ class Calculator {
         this.operation = "";
         this.loop = true;
 
+
+
     }
 
     render(outputfield) {
@@ -75,7 +82,7 @@ class Calculator {
         this.secondNumber = "";
         this.operation = "";
         this.maxDur = 10;
-        this.resultStory = [];
+        this.loop = false;
     }
 
 }

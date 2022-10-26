@@ -67,13 +67,15 @@ body {
 .result-field {
     border: 1px solid #000;
     width: 150px;
+    height: 430px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    overflow: hidden;
 }
 
 .result-field__row {
     height: 30px;
-    border: 1px solid #000;
     font-size: 25px;
     text-align: end;
 }
