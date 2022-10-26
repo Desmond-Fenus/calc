@@ -9,6 +9,7 @@ let events = {
     num: document.querySelectorAll('button[num]'),
     oper: document.querySelectorAll('button[oper]'),
     res: document.querySelector('button[result]'),
+    reset: document.querySelector('button[reset]'),
 }
 
 class Calculator {
@@ -18,6 +19,7 @@ class Calculator {
     operation = "";
     maxDur = 10;
     resultStory = [];
+    loop = false;
 
     inputNumber(value) {
         if (this.operation) {
@@ -26,7 +28,7 @@ class Calculator {
             this.secondNumber = this.secondNumber + value;
             return
         }
-        if (this.resultStory.length != 0) return
+        if (this.loop) return
         if (this.firstNumber.replace(".", "").length >= this.maxDur) return;
         if (value === "." && this.firstNumber.includes(".")) return;
         this.firstNumber = this.firstNumber + value;
@@ -52,19 +54,28 @@ class Calculator {
             case "/":
                 this.resultStory.push(+(this.firstNumber) / +(this.secondNumber));
                 break;
+            case "sqrt":
+                this.resultStory.push(Math.sqrt(this.firstNumber));
+                break;
         }
-        console.log(this.resultStory)
 
         this.firstNumber = this.resultStory.slice(-1).toString()
         this.secondNumber = "";
         this.operation = "";
-
-        console.log(this.firstNumber)
+        this.loop = true;
 
     }
 
     render(outputfield) {
         this.secondNumber ? outputfield.innerHTML = this.secondNumber : outputfield.innerHTML = this.firstNumber
+    }
+
+    reset() {
+        this.firstNumber = "0";
+        this.secondNumber = "";
+        this.operation = "";
+        this.maxDur = 10;
+        this.resultStory = [];
     }
 
 }
@@ -90,6 +101,12 @@ events.res
     .addEventListener("click", () => {
         calc.result();
     })
+
+events.reset
+    .addEventListener('click', () => {
+        calc.reset();
+    })
+
 
 fields.buttons
     .addEventListener('click', () => {
